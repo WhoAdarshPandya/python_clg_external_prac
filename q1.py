@@ -39,11 +39,27 @@ def clear_all():
 
 # fn for crust selection
 def crust_sell():
-    print(str(crust_selection.get()))
+    if crust_selection.get() == 6:
+        crust_sel_value= "Thin"
+    if crust_selection.get() == 7:
+        crust_sel_value= "Thick"
+    if crust_selection.get() == 8:
+        crust_sel_value = "Hand Tossed"
+    if crust_selection.get() == 9:
+        crust_sel_value = "Artisanal"
+    print(crust_sel_value)
 
 # fn for meat selection
 def meat_sell():
-    print(str(meat_selection.get()))
+    if meat_selection.get() == 10:
+        meats_sel_value= "Pepperoni"
+    if meat_selection.get() == 11:
+        meats_sel_value= "Sausage"
+    if meat_selection.get() == 12:
+        meats_sel_value = "Hamburger"
+    if meat_selection.get() == 13:
+        meats_sel_value = "Canadian Baccon"
+    print(meats_sel_value)
 
 # fn for veggies sel
 def veggie_sell():
@@ -52,7 +68,11 @@ def veggie_sell():
 
 # function for RB-delivery
 def sell():
-    print("you selected option")
+    if varr.get() == 4:
+        delivery_sel_value = "Home Delivery"
+    else:
+        delivery_sel_value = "Pickup"
+    print(delivery_sel_value)
 
 # detect button click
 def submit():
@@ -170,11 +190,11 @@ meatsLabelFrame = LabelFrame(window,text="Meats",padx=5,pady=5)
 meatsLabelFrame.pack(side=LEFT,padx=20)
 rb10 = Radiobutton(meatsLabelFrame,text="Pepperoni",variable=meat_selection,value=10,command=meat_sell)
 rb10.pack()
-rb11 = Radiobutton(meatsLabelFrame,text="Onions",variable=meat_selection,value=11,command=meat_sell)
+rb11 = Radiobutton(meatsLabelFrame,text="sausage",variable=meat_selection,value=11,command=meat_sell)
 rb11.pack()
-rb12 = Radiobutton(meatsLabelFrame,text="Mushrooms",variable=meat_selection,value=12,command=meat_sell)
+rb12 = Radiobutton(meatsLabelFrame,text="Hamburger",variable=meat_selection,value=12,command=meat_sell)
 rb12.pack()
-rb13 = Radiobutton(meatsLabelFrame,text="Olives",variable=meat_selection,value=13,command=meat_sell)
+rb13 = Radiobutton(meatsLabelFrame,text="canadian bacon",variable=meat_selection,value=13,command=meat_sell)
 rb13.pack()
 
 # pack button on main
