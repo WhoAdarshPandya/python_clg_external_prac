@@ -3,6 +3,7 @@ from PIL import ImageTk,Image
 from tkinter import messagebox
 import csv
 import os
+import xlsxwriter 
 
 print("hello world")
 # main window
@@ -115,21 +116,72 @@ def submit():
         messagebox.showinfo("msg","delivery not selected")
     if name_value != "" and address_value != "" and phone_value != "" and crust_sel_value != "" and meats_sel_value != "" and veggies_sel_value != "" and payment_sel_value != "" and delivery_sel_value != "":
         messagebox.showinfo("msg","order placed successfully")
-        if os.path.exists("./q1/data.csv"):
+        if os.path.exists("./q1/data.csv") and os.path.exists("./q1/o_data.xlsx"):
+            print("in exist")
+            # write in csv
             row_list=[["Name","Address","Phone","Payment Option","Delivery Option","Crust","Meat","Veggies"],
                         [name_value,address_value,phone_value,payment_sel_value,delivery_sel_value,crust_sel_value,meats_sel_value,veggies_sel_value]]
             with open('./q1/data.csv','w',newline='') as file:
                 writer = csv.writer(file)
                 writer.writerows(row_list)
+            # write in xlsx
+            book = xlsxwriter.Workbook('./q1/o_data.xlsx')
+            worksheet = book.add_worksheet()
+            worksheet.write('A1', 'Name')
+            worksheet.write('B1', 'Adress')
+            worksheet.write('C1', 'Phone')
+            worksheet.write('D1', 'Payment Option')
+            worksheet.write('E1', 'Delivery Option')
+            worksheet.write('F1', 'Crust Option')
+            worksheet.write('G1', 'Meat Option')
+            worksheet.write('H1', 'Veggies Option')
+
+            worksheet.write('A2', name_value)
+            worksheet.write('B2', address_value)
+            worksheet.write('C2', phone_value)
+            worksheet.write('D2', payment_sel_value)
+            worksheet.write('E2', delivery_sel_value)
+            worksheet.write('F2', crust_sel_value)
+            worksheet.write('G2', meats_sel_value)
+            worksheet.write('H2', veggies_sel_value)
+
+            book.close()
         else:
+            # create data.csv
             f = open("./q1/data.csv","w")
             f.close()
+            # create o_data.xlsx
+            f = open("./q1/o_data.xlsx","w")
+            f.close()
+            # write in data.csv
             row_list=[["Name","Address","Phone","Payment Option","Delivery Option","Crust","Meat","Veggies"],
                         [name_value,address_value,phone_value,payment_sel_value,delivery_sel_value,crust_sel_value,meats_sel_value,veggies_sel_value]]
             with open('./q1/data.csv','w',newline='') as file:
                 writer = csv.writer(file)
                 writer.writerows(row_list)
+            # write in o_data.xlsx 
+            book = xlsxwriter.Workbook('./q1/o_data.xlsx')
+            worksheet = book.add_worksheet()
+            worksheet.write('A1', 'Name')
+            worksheet.write('B1', 'Adress')
+            worksheet.write('C1', 'Phone')
+            worksheet.write('D1', 'Payment Option')
+            worksheet.write('E1', 'Delivery Option')
+            worksheet.write('F1', 'Crust Option')
+            worksheet.write('G1', 'Meat Option')
+            worksheet.write('H1', 'Veggies Option')
 
+            worksheet.write('A2', name_value)
+            worksheet.write('B2', address_value)
+            worksheet.write('C2', phone_value)
+            worksheet.write('D2', payment_sel_value)
+            worksheet.write('E2', delivery_sel_value)
+            worksheet.write('F2', crust_sel_value)
+            worksheet.write('G2', meats_sel_value)
+            worksheet.write('H2', veggies_sel_value)
+
+            book.close()
+            
 # select payment option
 var = IntVar()
 
@@ -141,6 +193,7 @@ address = StringVar()
 Phone = StringVar()
 
 # crust selection RB
+
 crust_selection = IntVar()
 meat_selection = IntVar()
 veggies_selection1 = StringVar()
@@ -149,32 +202,43 @@ veggies_selection3 = StringVar()
 veggies_selection4 = StringVar()
 
 # add canvas to add image
+
 canvas = Canvas(window,width=800,height=200,bg="red")
 canvas.pack()
+
 # use ImageTk to read image
+
 img = ImageTk.PhotoImage(Image.open("./q1/photo.jpg"))
 canvas.create_image(0, 0,anchor=NW, image=img) 
 
 # add input group
+
 group = LabelFrame(window,width=800, text="Customer Info", padx=5, pady=5)
 group.pack(fill="x",side=TOP)
 
 # add label 1 and entry 1
+
 lbl = Label(group,text="Name :")
 lbl.pack(side=LEFT)
 w = Entry(group,textvariable=name)
 w.pack(side=LEFT)
+
 # add label 2 and entry 2
+
 lbl2= Label(group,text="Address : ")
 lbl2.pack(side=LEFT)
 w2 = Entry(group,textvariable=address)
 w2.pack(side=LEFT)
+
 # add label 3 and entry 3
+
 lbl2= Label(group,text="Phone : ")
 lbl2.pack(side=LEFT)
 w2 = Entry(group,textvariable=Phone)
 w2.pack(side=LEFT)
+
 # add another input group for payment
+
 payment_group = LabelFrame(group,text="payment",padx=5,pady=5)
 payment_group.pack(side=BOTTOM)
 rb1 = Radiobutton(payment_group,text="Cash",variable=var,value=1,command=sel)
@@ -185,16 +249,19 @@ rb3 = Radiobutton(payment_group,text="Credit Card",variable=var,value=3,command=
 rb3.pack(side=LEFT)
 
 # add another input group delivery
+
 delivery_group = LabelFrame(group,text="Delivery",padx=5,pady=5)
 delivery_group.pack(side=BOTTOM)
 
 # add radio button
+
 rb4 = Radiobutton(delivery_group,text="Home Delivery",variable=varr,value=4,command=sell)
 rb4.pack(side=LEFT)
 rb5 = Radiobutton(delivery_group,text="Pickup",variable=varr,value=5,command=sell)
 rb5.pack(side=LEFT)
 
 # three input groups
+
 # crust
 crustLabelFrame = LabelFrame(window,text="Crust",padx=5,pady=5)
 crustLabelFrame.pack(side=LEFT,padx=5,pady=5)
