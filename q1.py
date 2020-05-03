@@ -6,14 +6,49 @@ print("hello world")
 # main window
 window = Tk()
 
+# selected value vars
+payment_sel_value=""
+delivery_sel_value=""
+crust_sel_value=""
+veggies_sel_value=""
+meats_sel_value=""
+
 # function for RB-payment
 def sel():
-    print("you selected option")
-    print(str(var.get()))
+    if var.get() == 1:
+        payment_sel_value="Cash"
+    if var.get() == 2:
+        payment_sel_value = "Cheque"
+    if var.get() == 3:
+        payment_sel_value = "Credit Card"
+    print(payment_sel_value)
+
+# fn to reset all
+def clear_all():
+    name.set("")
+    Phone.set("")
+    address.set("")
+    var.set(0)
+    varr.set(0)
+    crust_selection.set(0)
+    meat_selection.set(0)
+    veggies_selection1.set("")
+    veggies_selection2.set("")
+    veggies_selection3.set("")
+    veggies_selection4.set("")
 
 # fn for crust selection
 def crust_sell():
     print(str(crust_selection.get()))
+
+# fn for meat selection
+def meat_sell():
+    print(str(meat_selection.get()))
+
+# fn for veggies sel
+def veggie_sell():
+    veggies_sel_value = veggies_selection1.get() + veggies_selection2.get()  + veggies_selection3.get() +veggies_selection4.get()
+    print(veggies_sel_value) 
 
 # function for RB-delivery
 def sell():
@@ -53,6 +88,11 @@ Phone = StringVar()
 
 # crust selection RB
 crust_selection = IntVar()
+meat_selection = IntVar()
+veggies_selection1 = StringVar()
+veggies_selection2 = StringVar()
+veggies_selection3 = StringVar()
+veggies_selection4 = StringVar()
 
 # add canvas to add image
 canvas = Canvas(window,width=800,height=200,bg="red")
@@ -116,10 +156,10 @@ rb9.pack()
 # Veggies 
 veggiesLabelFrame = LabelFrame(window,text="Veggies",padx=5,pady=5)
 veggiesLabelFrame.pack(side=LEFT,padx=40)
-chkbox1 = Checkbutton(veggiesLabelFrame,text="Peppers")
-chkbox2 = Checkbutton(veggiesLabelFrame,text="Onions")
-chkbox3 = Checkbutton(veggiesLabelFrame,text="Mushrums")
-chkbox4 = Checkbutton(veggiesLabelFrame,text="Olives")
+chkbox1 = Checkbutton(veggiesLabelFrame,text="Peppers",variable=veggies_selection1,onvalue="Peppers",offvalue="",command=veggie_sell)
+chkbox2 = Checkbutton(veggiesLabelFrame,text="Onions",variable=veggies_selection2,onvalue="Onions",offvalue="",command=veggie_sell)
+chkbox3 = Checkbutton(veggiesLabelFrame,text="Mushrums",variable=veggies_selection3,onvalue="Mushrooms",offvalue="",command=veggie_sell)
+chkbox4 = Checkbutton(veggiesLabelFrame,text="Olives",variable=veggies_selection4,onvalue="Olives",offvalue="",command=veggie_sell)
 chkbox1.pack()
 chkbox2.pack()
 chkbox3.pack()
@@ -128,17 +168,19 @@ chkbox4.pack()
 # Meats
 meatsLabelFrame = LabelFrame(window,text="Meats",padx=5,pady=5)
 meatsLabelFrame.pack(side=LEFT,padx=20)
-rb10 = Radiobutton(meatsLabelFrame,text="Pepperoni",variable=crust_selection,value=6,command=crust_sell)
+rb10 = Radiobutton(meatsLabelFrame,text="Pepperoni",variable=meat_selection,value=10,command=meat_sell)
 rb10.pack()
-rb11 = Radiobutton(meatsLabelFrame,text="Onions",variable=crust_selection,value=6,command=crust_sell)
+rb11 = Radiobutton(meatsLabelFrame,text="Onions",variable=meat_selection,value=11,command=meat_sell)
 rb11.pack()
-rb12 = Radiobutton(meatsLabelFrame,text="Mushrooms",variable=crust_selection,value=6,command=crust_sell)
+rb12 = Radiobutton(meatsLabelFrame,text="Mushrooms",variable=meat_selection,value=12,command=meat_sell)
 rb12.pack()
-rb13 = Radiobutton(meatsLabelFrame,text="Olives",variable=crust_selection,value=6,command=crust_sell)
+rb13 = Radiobutton(meatsLabelFrame,text="Olives",variable=meat_selection,value=13,command=meat_sell)
 rb13.pack()
 
 # pack button on main
 btn = Button(window,text="place order",command=submit,bg ="#01796f",fg="white")
+btn.pack(pady=5,padx=5,side=BOTTOM)
+btn = Button(window,text="reset",command=clear_all,bg ="#01796f",fg="white")
 btn.pack(pady=5,padx=5,side=BOTTOM)
 
 window.tk.call('wm','iconphoto',window._w,PhotoImage(file="./slice.png"))
