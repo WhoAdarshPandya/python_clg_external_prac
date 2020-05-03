@@ -11,6 +11,10 @@ def sel():
     print("you selected option")
     print(str(var.get()))
 
+# fn for crust selection
+def crust_sell():
+    print(str(crust_selection.get()))
+
 # function for RB-delivery
 def sell():
     print("you selected option")
@@ -46,6 +50,9 @@ varr = IntVar()
 name = StringVar()
 address = StringVar()
 Phone = StringVar()
+
+# crust selection RB
+crust_selection = IntVar()
 
 # add canvas to add image
 canvas = Canvas(window,width=800,height=200,bg="red")
@@ -93,9 +100,46 @@ rb4.pack(side=LEFT)
 rb5 = Radiobutton(delivery_group,text="Pickup",variable=varr,value=5,command=sell)
 rb5.pack(side=LEFT)
 
+# three input groups
+# crust
+crustLabelFrame = LabelFrame(window,text="Crust",padx=5,pady=5)
+crustLabelFrame.pack(side=LEFT,padx=5,pady=5)
+rb6 = Radiobutton(crustLabelFrame,text="Thin",variable=crust_selection,value=6,command=crust_sell)
+rb6.pack()
+rb7 = Radiobutton(crustLabelFrame,text="Thick",variable=crust_selection,value=7,command=crust_sell)
+rb7.pack()
+rb8 = Radiobutton(crustLabelFrame,text="HandTossed",variable=crust_selection,value=8,command=crust_sell)
+rb8.pack()
+rb9 = Radiobutton(crustLabelFrame,text="Artisanal",variable=crust_selection,value=9,command=crust_sell)
+rb9.pack()
+
+# Veggies 
+veggiesLabelFrame = LabelFrame(window,text="Veggies",padx=5,pady=5)
+veggiesLabelFrame.pack(side=LEFT,padx=40)
+chkbox1 = Checkbutton(veggiesLabelFrame,text="Peppers")
+chkbox2 = Checkbutton(veggiesLabelFrame,text="Onions")
+chkbox3 = Checkbutton(veggiesLabelFrame,text="Mushrums")
+chkbox4 = Checkbutton(veggiesLabelFrame,text="Olives")
+chkbox1.pack()
+chkbox2.pack()
+chkbox3.pack()
+chkbox4.pack()
+
+# Meats
+meatsLabelFrame = LabelFrame(window,text="Meats",padx=5,pady=5)
+meatsLabelFrame.pack(side=LEFT,padx=20)
+rb10 = Radiobutton(meatsLabelFrame,text="Pepperoni",variable=crust_selection,value=6,command=crust_sell)
+rb10.pack()
+rb11 = Radiobutton(meatsLabelFrame,text="Onions",variable=crust_selection,value=6,command=crust_sell)
+rb11.pack()
+rb12 = Radiobutton(meatsLabelFrame,text="Mushrooms",variable=crust_selection,value=6,command=crust_sell)
+rb12.pack()
+rb13 = Radiobutton(meatsLabelFrame,text="Olives",variable=crust_selection,value=6,command=crust_sell)
+rb13.pack()
+
 # pack button on main
 btn = Button(window,text="place order",command=submit,bg ="#01796f",fg="white")
-btn.pack(fill="x",pady=5,padx=5)
+btn.pack(pady=5,padx=5,side=BOTTOM)
 
 window.tk.call('wm','iconphoto',window._w,PhotoImage(file="./slice.png"))
 window.geometry("800x500")
