@@ -107,7 +107,10 @@ def submit():
         messagebox.showinfo("msg","Meat is not selected")
     if veggies_sel_value == "":
         messagebox.showinfo("msg","veggie not selected")
-
+    if payment_sel_value == "":
+        messagebox.showinfo("msg","veggie not selected")
+    if delivery_sel_value == "":
+        messagebox.showinfo("msg","veggie not selected")
 
 # select payment option
 var = IntVar()
