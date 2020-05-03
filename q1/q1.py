@@ -111,6 +111,8 @@ def submit():
         messagebox.showinfo("msg","payment not selected")
     if delivery_sel_value == "":
         messagebox.showinfo("msg","delivery not selected")
+    if name_value != "" and address_value != "" and phone_value != "" and crust_sel_value != "" and meats_sel_value != "" and veggies_sel_value != "" and payment_sel_value != "" and delivery_sel_value != "":
+        print("start to file")
 
 # select payment option
 var = IntVar()
@@ -134,7 +136,7 @@ veggies_selection4 = StringVar()
 canvas = Canvas(window,width=800,height=200,bg="red")
 canvas.pack()
 # use ImageTk to read image
-img = ImageTk.PhotoImage(Image.open("./photo.jpg"))
+img = ImageTk.PhotoImage(Image.open("./q1/photo.jpg"))
 canvas.create_image(0, 0,anchor=NW, image=img) 
 
 # add input group
@@ -219,6 +221,6 @@ btn.pack(pady=5,padx=5,side=BOTTOM)
 btn = Button(window,text="reset",command=clear_all,bg ="#01796f",fg="white")
 btn.pack(pady=5,padx=5,side=BOTTOM)
 
-window.tk.call('wm','iconphoto',window._w,PhotoImage(file="./slice.png"))
+window.tk.call('wm','iconphoto',window._w,PhotoImage(file="./q1/slice.png"))
 window.geometry("800x500")
 window.mainloop()
