@@ -15,6 +15,7 @@ meats_sel_value=""
 
 # function for RB-payment
 def sel():
+    global payment_sel_value
     if var.get() == 1:
         payment_sel_value="Cash"
     if var.get() == 2:
@@ -39,6 +40,7 @@ def clear_all():
 
 # fn for crust selection
 def crust_sell():
+    global crust_sel_value
     if crust_selection.get() == 6:
         crust_sel_value= "Thin"
     if crust_selection.get() == 7:
@@ -51,6 +53,7 @@ def crust_sell():
 
 # fn for meat selection
 def meat_sell():
+    global meats_sel_value
     if meat_selection.get() == 10:
         meats_sel_value= "Pepperoni"
     if meat_selection.get() == 11:
@@ -63,11 +66,13 @@ def meat_sell():
 
 # fn for veggies sel
 def veggie_sell():
+    global veggies_sel_value
     veggies_sel_value = veggies_selection1.get() + veggies_selection2.get()  + veggies_selection3.get() +veggies_selection4.get()
     print(veggies_sel_value) 
 
 # function for RB-delivery
 def sell():
+    global delivery_sel_value
     if varr.get() == 4:
         delivery_sel_value = "Home Delivery"
     else:
@@ -79,14 +84,15 @@ def submit():
     name_value=name.get()
     address_value = address.get()
     phone_value = Phone.get()
+    print(payment_sel_value,delivery_sel_value,meats_sel_value,veggies_sel_value,crust_sel_value)
+
     #! to change values in text box
     # name.set("abcd")
     # address.set("efgh")
     # Phone.set("lmop")
-    # print(f'{phone_value} {name_value} {address_value}')
     #todo validation
     if name_value == "" or address_value == "" or phone_value == "":
-        messagebox.showinfo("some fields are empty","please provide your name,address and phone properly")
+        messagebox.showinfo("some text fields are empty","please provide your name,address and phone properly")
         # messagebox.showwarning("this is warning","warning")
         # messagebox.showerror("this is error","aksjdl")
         # bool_val = messagebox.askokcancel("lorem ipsum","sit init")
@@ -95,6 +101,13 @@ def submit():
         # else:
         #     messagebox.showinfo("sldjfsf","dfls")
         #     window.destroy()
+    if crust_sel_value == "":
+        messagebox.showinfo("msg","crust is not selected")
+    if meats_sel_value == "":
+        messagebox.showinfo("msg","Meat is not selected")
+    if veggies_sel_value == "":
+        messagebox.showinfo("msg","veggie not selected")
+
 
 # select payment option
 var = IntVar()
