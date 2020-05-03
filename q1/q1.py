@@ -1,6 +1,8 @@
 from tkinter import *
 from PIL import ImageTk,Image
 from tkinter import messagebox
+import csv
+import os
 
 print("hello world")
 # main window
@@ -112,7 +114,21 @@ def submit():
     if delivery_sel_value == "":
         messagebox.showinfo("msg","delivery not selected")
     if name_value != "" and address_value != "" and phone_value != "" and crust_sel_value != "" and meats_sel_value != "" and veggies_sel_value != "" and payment_sel_value != "" and delivery_sel_value != "":
-        print("start to file")
+        messagebox.showinfo("msg","order placed successfully")
+        if os.path.exists("./q1/data.csv"):
+            row_list=[["Name","Address","Phone","Payment Option","Delivery Option","Crust","Meat","Veggies"],
+                        [name_value,address_value,phone_value,payment_sel_value,delivery_sel_value,crust_sel_value,meats_sel_value,veggies_sel_value]]
+            with open('./q1/data.csv','w',newline='') as file:
+                writer = csv.writer(file)
+                writer.writerows(row_list)
+        else:
+            f = open("./q1/data.csv","w")
+            f.close()
+            row_list=[["Name","Address","Phone","Payment Option","Delivery Option","Crust","Meat","Veggies"],
+                        [name_value,address_value,phone_value,payment_sel_value,delivery_sel_value,crust_sel_value,meats_sel_value,veggies_sel_value]]
+            with open('./q1/data.csv','w',newline='') as file:
+                writer = csv.writer(file)
+                writer.writerows(row_list)
 
 # select payment option
 var = IntVar()
