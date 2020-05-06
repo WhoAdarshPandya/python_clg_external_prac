@@ -5,7 +5,6 @@ import csv
 import os
 import xlsxwriter 
 
-print("hello world")
 # main window
 window = Tk()
 
@@ -116,16 +115,16 @@ def submit():
         messagebox.showinfo("msg","delivery not selected")
     if name_value != "" and address_value != "" and phone_value != "" and crust_sel_value != "" and meats_sel_value != "" and veggies_sel_value != "" and payment_sel_value != "" and delivery_sel_value != "":
         messagebox.showinfo("msg","order placed successfully")
-        if os.path.exists("./q1/data.csv") and os.path.exists("./q1/o_data.xlsx"):
+        if os.path.exists("./data.csv") and os.path.exists("./o_data.xlsx"):
             print("in exist")
             # write in csv
             row_list=[["Name","Address","Phone","Payment Option","Delivery Option","Crust","Meat","Veggies"],
                         [name_value,address_value,phone_value,payment_sel_value,delivery_sel_value,crust_sel_value,meats_sel_value,veggies_sel_value]]
-            with open('./q1/data.csv','w',newline='') as file:
+            with open('./data.csv','w',newline='') as file:
                 writer = csv.writer(file)
                 writer.writerows(row_list)
             # write in xlsx
-            book = xlsxwriter.Workbook('./q1/o_data.xlsx')
+            book = xlsxwriter.Workbook('./o_data.xlsx')
             worksheet = book.add_worksheet()
             worksheet.write('A1', 'Name')
             worksheet.write('B1', 'Adress')
@@ -148,19 +147,19 @@ def submit():
             book.close()
         else:
             # create data.csv
-            f = open("./q1/data.csv","w")
+            f = open("./data.csv","w")
             f.close()
             # create o_data.xlsx
-            f = open("./q1/o_data.xlsx","w")
+            f = open("./o_data.xlsx","w")
             f.close()
             # write in data.csv
             row_list=[["Name","Address","Phone","Payment Option","Delivery Option","Crust","Meat","Veggies"],
                         [name_value,address_value,phone_value,payment_sel_value,delivery_sel_value,crust_sel_value,meats_sel_value,veggies_sel_value]]
-            with open('./q1/data.csv','w',newline='') as file:
+            with open('./data.csv','w',newline='') as file:
                 writer = csv.writer(file)
                 writer.writerows(row_list)
             # write in o_data.xlsx 
-            book = xlsxwriter.Workbook('./q1/o_data.xlsx')
+            book = xlsxwriter.Workbook('./o_data.xlsx')
             worksheet = book.add_worksheet()
             worksheet.write('A1', 'Name')
             worksheet.write('B1', 'Adress')
@@ -203,14 +202,19 @@ veggies_selection4 = StringVar()
 
 # add canvas to add image
 
-canvas = Canvas(window,width=800,height=200,bg="red")
+canvas = Canvas(window,width=800,height=200,bg="#90EE90")
 canvas.pack()
 
 # use ImageTk to read image
 
-img = ImageTk.PhotoImage(Image.open("./q1/photo.jpg"))
+img = ImageTk.PhotoImage(Image.open("./photo.jpg"))
 canvas.create_image(0, 0,anchor=NW, image=img) 
-
+labl = Label(window,text="Pepe's Pizza")
+labl.config(font=("Magneto",30,"italic"),fg="red",bg="#90EE90")
+labl.place(x=380,y=70)
+labl2 = Label(window,text="www.pepespizza.com/order.php")
+labl2.config(font=("Times New Roman",15,"bold"),fg="black",bg="#90EE90")
+labl2.place(x=380,y=110)
 # add input group
 
 group = LabelFrame(window,width=800, text="Customer Info", padx=5, pady=5)
@@ -304,6 +308,6 @@ btn.pack(pady=5,padx=5,side=BOTTOM)
 btn = Button(window,text="reset",command=clear_all,bg ="#01796f",fg="white")
 btn.pack(pady=5,padx=5,side=BOTTOM)
 
-window.tk.call('wm','iconphoto',window._w,PhotoImage(file="./q1/slice.png"))
-window.geometry("800x500")
+window.tk.call('wm','iconphoto',window._w,PhotoImage(file="./slice.png"))
+window.geometry("800x600")
 window.mainloop()
