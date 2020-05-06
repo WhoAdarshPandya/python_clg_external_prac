@@ -64,4 +64,12 @@ btn3.place(x=150,y=120)
 btn3 = Button(window,text="<<",command=swap4)
 btn3.place(x=150,y=150)
 
+# Combobox creation 
+n = StringVar() 
+def hi(evt):
+    print(n.get())
+monthchoosen = Combobox(window, width = 27, textvariable = n) 
+monthchoosen['values'] = (' January',  ' February', ' March', ' November', ' December') 
+monthchoosen.bind("<<ComboboxSelected>>",hi)
+monthchoosen.place(x=10,y=200)
 window.mainloop()
