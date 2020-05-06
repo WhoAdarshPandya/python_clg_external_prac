@@ -1,0 +1,6 @@
+f = open('./read_this_file_entire.txt','a')
+f.write("\nthis is new line")
+f.close()
+f = open('./read_this_file_entire.txt','r')
+data = f.read()
+print(data)
