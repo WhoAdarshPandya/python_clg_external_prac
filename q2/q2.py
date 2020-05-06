@@ -8,7 +8,72 @@ import xlsxwriter
 
 
 def saveData():
-    pass
+    if variable.get() == "" or busnum.get() == "" or afare.get() == "" or cfare.get() == "" or depot.get() == "" or fareinc.get() == "" or mincharge.get() == "":
+        messagebox.showinfo("title","some fields are empty...")
+    else:
+        if os.path.exists('./data.csv') or os.path.exists('./o_data.xlsx'):
+            print("in exist")
+            #write in csv
+            row_list=[["bus Type","bus Number","Minimum charge","Depot","Fare Increament","Child FAre","Adult fare"],
+                        [variable.get(),busnum.get(),mincharge.get(),depot.get(),fareinc.get(),cfare.get(),afare.get()]]
+            with open('./data.csv','w',newline='') as file:
+                writer = csv.writer(file)
+                writer.writerows(row_list)        
+            # write in xlsx
+            
+            book = xlsxwriter.Workbook('./o_data.xlsx')
+            worksheet = book.add_worksheet()
+            worksheet.write('A1', 'but Type')
+            worksheet.write('B1', 'bus Number')
+            worksheet.write('C1', 'Minimum Charge')
+            worksheet.write('D1', 'Depot')
+            worksheet.write('E1', 'Fare Imcrement')
+            worksheet.write('F1', 'Child Fare')
+            worksheet.write('G1', 'Adult Fare')
+            
+            worksheet.write('A2', variable.get())
+            worksheet.write('B2', busnum.get())
+            worksheet.write('C2', mincharge.get())
+            worksheet.write('D2', depot.get())
+            worksheet.write('E2', fareinc.get())
+            worksheet.write('F2', cfare.get())
+            worksheet.write('G2', afare.get())
+
+            book.close()
+        else:
+            # create data.csv
+            f = open("./data.csv","w")
+            f.close()
+            # create o_data.xlsx
+            f = open("./o_data.xlsx","w")
+            f.close()
+            #write in csv
+            row_list=[["bus Type","bus Number","Minimum charge","Depot","Fare Increament","Child FAre","Adult fare"],
+                        [variable.get(),busnum.get(),mincharge.get(),depot.get(),fareinc.get(),cfare.get(),afare.get()]]
+            with open('./data.csv','w',newline='') as file:
+                writer = csv.writer(file)
+                writer.writerows(row_list)        
+            # write in xlsx
+            book = xlsxwriter.Workbook('./o_data.xlsx')
+            worksheet = book.add_worksheet()
+            worksheet.write('A1', 'but Type')
+            worksheet.write('B1', 'bus Number')
+            worksheet.write('C1', 'Minimum Charge')
+            worksheet.write('D1', 'Depot')
+            worksheet.write('E1', 'Fare Imcrement')
+            worksheet.write('F1', 'Child Fare')
+            worksheet.write('G1', 'Adult Fare')
+
+            worksheet.write('A2', variable.get())
+            worksheet.write('B2', busnum.get())
+            worksheet.write('C2', mincharge.get())
+            worksheet.write('D2', depot.get())
+            worksheet.write('E2', fareinc.get())
+            worksheet.write('F2', cfare.get())
+            worksheet.write('G2', afare.get())
+
+            book.close()
+
 
 def clearData():
     variable.set("selectOne")
